@@ -3,6 +3,7 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import {
   APIRequestDetail,
   IApiDetails,
+  RequestAuthType,
   RequestBodyType,
 } from "@/schema/http.schema";
 import { sanitizeController } from "./sanitize-controller";
@@ -38,6 +39,16 @@ export const makeHttpRequest = async (
     },
     data: transformedData,
   };
+
+  if (apiDetails.requestAuthType === RequestAuthType.AUTH) {
+    const token = localStorage.getItem("authToken")?.replace(/^"|"$/g, ""); // Remove any extra quotes
+    if (token) {
+      config.headers = {
+        ...config.headers,
+        Authorization: `Bearer ${token}`,
+      };
+    }
+  }
 
   if (apiRequestDetails.params) {
     config = {

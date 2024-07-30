@@ -2,14 +2,14 @@
 import Image from "next/image";
 
 interface IButtonProps {
-  onClick?: () => void;
+  onButtonClick?: () => void;
 }
 
-const AddNewButton = ({ onClick }: IButtonProps) => {
+const AddNewButton = ({ onButtonClick }: IButtonProps) => {
   return (
     <button
-      onClick={onClick}
-      className="flex items-center w-[380px] h-[40px] bg-gradient-to-b from-[#3A3A3A] to-[#202020] rounded-md text-white justify-between p-[8px] "
+      onClick={onButtonClick}
+      className="flex items-center w-[340px] h-[40px] bg-gradient-to-b from-[#3A3A3A] to-[#202020] rounded-md text-white justify-between p-[8px] "
     >
       <div> Add New </div>
       <Image

@@ -5,20 +5,20 @@ interface cardData {
   cardData?: ITaskInterface;
 }
 
-const Card: React.FC = ({ cardData }: cardData) => {
+const Card = ({ cardData }: cardData) => {
   return (
-    <div className="bg-[#F9F9F9] w-[380px] px-4 py-4 border-[1px] border-[#DEDEDE] space-y-4 rounded-lg shadow-md">
+    <div className="bg-[#F9F9F9] w-[340px] px-4 py-4 border-[1px] border-[#DEDEDE] space-y-3 rounded-lg shadow-md">
       <div className="space-y-4">
-        <div className=" text-[16px] font-[500] text-[#606060] ">
+        <div className=" text-[16px] font-[500] text-gray-800 ] ">
           {cardData?.title || "Implement User Authentication "}
         </div>
-        <div className="text-[14px] font-[400] text-[#797979] ">
+        <div className="text-[14px] font-[400] text-gray-600 ">
           {cardData?.description ||
             "Develop and integrate user authentication using email and password."}
         </div>
       </div>
       <div
-        className={`  text-[12px] font-[400] text-white  px-2 py-1 w-[55px] h-[27px] rounded-[8px] ${"bg-[#FF6B6B]"} `}
+        className={`   text-[12px] font-[400] text-white  px-2 py-1 w-[55px] h-[27px] rounded-md ${"bg-[#FF6B6B]"} `}
       >
         {cardData?.priority || "Urgent"}
       </div>
