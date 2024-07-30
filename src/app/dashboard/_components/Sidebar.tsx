@@ -1,6 +1,8 @@
+"use client";
 import Image from "next/image";
 import LogoutButton from "../core-components/LogoutButton";
 import CreateTaskButton from "../core-components/CreateTaskButton";
+import { useAuth } from "@/providers/AuthContext";
 
 const navItems = [
   {
@@ -31,6 +33,8 @@ const navItems = [
 ];
 
 const Sidebar = () => {
+  const { username, email } = useAuth();
+
   return (
     <div className="px-[15px] w-[285px] h-screen bg-white flex flex-col justify-between  ">
       {/* Top Element */}
@@ -45,7 +49,7 @@ const Sidebar = () => {
               height={31}
               className="rounded-md"
             />
-            <span className="font-[500] text-[20px]"> Sabin Pandey</span>
+            <span className="font-[500] text-[20px]">{username}</span>
           </div>
           <div className="flex justify-between">
             <div className="flex gap-x-[20px] items-center">

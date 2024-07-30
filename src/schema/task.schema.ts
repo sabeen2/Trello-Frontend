@@ -6,21 +6,20 @@ export enum TaskStatus {
 }
 
 export enum TaskPriority {
-  LOW = "low",
-  MEDIUM = "medium",
-  URGENT = "urgent",
+  LOW = "Low",
+  MEDIUM = "Medium",
+  URGENT = "Urgent",
 }
 
 export interface ITaskInterface {
-  _id: string;
-  title: string;
-  status: TaskStatus;
-  user: string;
-  description: string;
-  priority: TaskPriority;
-  isDeleted: boolean;
-  createdAt: string;
-  updatedAt: string;
+  _id?: string | any;
+  title?: string;
+  status?: TaskStatus;
+  user?: string;
+  description?: string;
+  priority?: TaskPriority;
+  createdAt?: string;
+  updatedAt?: string;
   deadline?: string;
   time?: string;
 }

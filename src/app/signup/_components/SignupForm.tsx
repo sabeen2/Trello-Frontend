@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Form, Input, message } from "antd";
-import { useSignup } from "@/app/api/authentication/queries";
+import { Form, Input, message, Spin } from "antd";
+import { useSignup } from "@/app/api-controllers/authentication/queries";
 import { ISignupRequest } from "@/schema/signup.schema";
 import Link from "next/link";
 import path from "../../../utils/paths.utils";
@@ -96,8 +96,9 @@ const SignupForm: React.FC = () => {
                   className={`text-white w-[528px] h-[52px] flex justify-center items-center shadow-custom rounded-lg border ${
                     isFormValid ? "opacity-100" : "opacity-80"
                   } bg-gradient-to-b from-[#4C38C2] to-[#2F2188] text-[20px] font-[400]`}
+                  disabled={isSignupPending}
                 >
-                  Signup
+                  {isSignupPending ? <Spin /> : "Signup"}
                 </button>
               </Form.Item>
             </Form>

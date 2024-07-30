@@ -1,3 +1,5 @@
+"use client";
+import { useAuth } from "@/providers/AuthContext";
 import Image from "next/image";
 
 const cartItems = [
@@ -19,11 +21,15 @@ const cartItems = [
 ];
 
 const Hero = () => {
+  const { username } = useAuth();
   return (
     <div className="space-y-4">
       {/* Welcome */}
       <div className="flex flex-row w-[1570px] justify-between">
-        <div className="text-[48px] font-[600]"> Good morning, Sabeen </div>
+        <div className="text-[48px] font-[600]">
+          {" "}
+          Good morning, {username.split(" ")[0]}{" "}
+        </div>
         <div className="flex items-center gap-x-2">
           <span> Help & feedback</span>
           <Image

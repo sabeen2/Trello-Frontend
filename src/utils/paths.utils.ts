@@ -1,4 +1,7 @@
 const paths = {
+  homePath: () => {
+    return "/";
+  },
   loginPath: () => {
     return "/login";
   },

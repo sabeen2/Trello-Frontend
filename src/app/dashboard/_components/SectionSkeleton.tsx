@@ -5,7 +5,7 @@ import AddNewButton from "../core-components/AddNewButton";
 
 const SectionSkeleton = ({ sectionTitle, cardDatas }: any) => {
   return (
-    <div className="space-y-4  overflow-y-scroll h-[55vh] border-gray-200 px-2 rounded-lg border-b-[1px] border-l-[1px] items-center justify-center ">
+    <div className="space-y-4  overflow-y-scroll max-h-[58vh] border-gray-200 px-2 rounded-lg border-b-[1px] border-l-[1px] items-center justify-center ">
       <div className="flex items-center w-[340px] justify-between px-2  ">
         <div className="font-[400] text-[20px]">{sectionTitle}</div>
         <Image

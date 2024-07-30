@@ -1,8 +1,8 @@
 "use client";
 import { useAuth } from "@/providers/AuthContext";
 import React, { useEffect, useState } from "react";
-import { Form, Input, message } from "antd";
-import { useLogin } from "@/app/api/authentication/queries";
+import { Form, Input, message, Spin } from "antd";
+import { useLogin } from "@/app/api-controllers/authentication/queries";
 import { ILoginRequest } from "@/schema/login.schema";
 import Link from "next/link";
 import path from "../../../utils/paths.utils";
@@ -84,8 +84,9 @@ const LoginForm: React.FC = () => {
                   className={`text-white w-[528px] h-[52px] flex justify-center items-center shadow-custom rounded-lg border ${
                     isFormValid ? "opacity-100" : "opacity-80"
                   } bg-gradient-to-b from-[#4C38C2] to-[#2F2188] text-[20px] font-[400]`}
+                  disabled={isLoginPending}
                 >
-                  Login
+                  {isLoginPending ? <Spin /> : "Login"}
                 </button>
               </Form.Item>
             </Form>

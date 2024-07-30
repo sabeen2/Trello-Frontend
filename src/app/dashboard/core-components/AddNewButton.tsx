@@ -5,7 +5,7 @@ interface IButtonProps {
   onButtonClick?: () => void;
 }
 
-const AddNewButton = ({ onButtonClick }: IButtonProps) => {
+const AddNewButton = ({ onButtonClick }: IButtonProps | any) => {
   return (
     <button
       onClick={onButtonClick}
