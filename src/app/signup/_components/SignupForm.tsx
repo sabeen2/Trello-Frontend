@@ -27,7 +27,7 @@ const SignupForm: React.FC = () => {
         router.push(path.loginPath());
       },
       onError: (err) => {
-        message.error(`Failed  ${err}`);
+        message.error(`Failed  ${err?.message}`);
       },
     });
   };

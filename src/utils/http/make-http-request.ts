@@ -66,7 +66,7 @@ export const makeHttpRequest = async (
 
     if (axios.isAxiosError(error)) {
       const axiosError = error as AxiosError;
-      errorMsg = error.response?.data?.message || axiosError.message;
+      errorMsg = error.response?.data?.msg || axiosError.message;
     } else {
       errorMsg = "something went wrong";
     }

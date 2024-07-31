@@ -52,7 +52,7 @@ const CreateForm: React.FC = () => {
             setSelectedUserId("");
           },
           onError: (err) => {
-            message.error(`Failed ${err}`);
+            message.error(`Failed ${err.message}`);
           },
         }
       );
@@ -65,7 +65,7 @@ const CreateForm: React.FC = () => {
           setOpen(false);
         },
         onError: (err) => {
-          message.error(`Failed ${err}`);
+          message.error(`Failed ${err.message}`);
         },
       });
     }

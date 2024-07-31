@@ -41,7 +41,7 @@ const Card = ({ cardData }: CardProps) => {
   return (
     <div
       ref={drag as unknown as React.LegacyRef<HTMLDivElement>}
-      className={`bg-slate-50 w-[340px] px-3 py-3 border border-[#DEDEDE] rounded-lg shadow-lg transition-transform duration-200 ${
+      className={`bg-slate-50 w-[360px] px-3 py-3 border border-[#DEDEDE] rounded-lg shadow-lg transition-transform duration-200 ${
         isDragging ? "opacity-70 scale-95" : "opacity-100 scale-100"
       }`}
     >

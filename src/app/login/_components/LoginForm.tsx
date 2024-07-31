@@ -25,7 +25,7 @@ const LoginForm: React.FC = () => {
         login(data.token);
       },
       onError: (err) => {
-        message.error(`Failed ${err}`);
+        message.error(`Failed ${err.message}`);
       },
     });
   };

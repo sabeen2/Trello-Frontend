@@ -33,7 +33,7 @@ const SectionSkeleton = ({
   return (
     <div
       ref={drop as unknown as React.LegacyRef<HTMLDivElement>}
-      className={`space-y-4 overflow-y-scroll max-h-[58vh] border-gray-200 px-2 rounded-lg border-b-[1px] border-l-[1px] items-center justify-center min-h-32 ${
+      className={`space-y-5 overflow-y-scroll max-h-[58vh] border-gray-200 px-2 rounded-lg border-b-[1px] border-l-[1px] items-center justify-center min-h-32 ${
         isOver ? "bg-gray-100" : "bg-white"
       }`}
     >
