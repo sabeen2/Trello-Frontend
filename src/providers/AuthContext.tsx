@@ -59,15 +59,17 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   }, [router]);
 
   useEffect(() => {
-    const decoded: IDecodedToken = jwtDecode(authToken);
-    setUsername(decoded?.username);
-    setEmail(decoded?.email);
-    const timeLeft = decoded.exp * 1000 - Date.now();
+    if (authToken) {
+      const decoded: IDecodedToken = jwtDecode(authToken);
+      setUsername(decoded?.username);
+      setEmail(decoded?.email);
+      const timeLeft = decoded.exp * 1000 - Date.now();
 
-    if (timeLeft > 0) {
-      setTimeout(() => {
-        logout();
-      }, timeLeft);
+      if (timeLeft > 0) {
+        setTimeout(() => {
+          logout();
+        }, timeLeft);
+      }
     }
   });
 
