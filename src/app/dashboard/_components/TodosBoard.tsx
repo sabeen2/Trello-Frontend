@@ -2,7 +2,10 @@
 import { useAuth } from "@/providers/AuthContext";
 import AddNewButton from "../core-components/AddNewButton";
 import SectionSkeleton from "./SectionSkeleton";
-import { useGetAllTasks } from "@/app/api-controllers/tasks/queries";
+import {
+  useGetAllTasks,
+  useUpdateTask,
+} from "@/app/api-controllers/tasks/queries";
 import { ITaskInterface, TaskStatus } from "@/schema/task.schema";
 import { useEffect, useCallback, useState } from "react";
 import { DndProvider } from "react-dnd";
@@ -10,8 +13,8 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { Spin } from "antd";
 
 const TodosBoard = () => {
-  const { username, success, open, setOpen, createForm } = useAuth();
-  const [taskList, setTaskList] = useState<ITaskInterface[]>([]);
+  const { username, success, setSuccess, open, setOpen, createForm } =
+    useAuth();
 
   const {
     data: allTasks,
@@ -19,16 +22,42 @@ const TodosBoard = () => {
     refetch: refetchTasks,
   } = useGetAllTasks(username);
 
+  const [taskList, setTaskList] = useState<ITaskInterface[]>([]);
+
   useEffect(() => {
     refetchTasks();
   }, [success]);
 
+  useEffect(() => {
+    if (allTasks?.tasks) {
+      setTaskList(allTasks.tasks);
+    }
+  }, [allTasks]);
+
   const getTasksByStatus = useCallback(
-    (status: any) => {
-      return allTasks?.tasks?.filter((task: any) => task.status === status);
+    (status: TaskStatus) => {
+      return taskList?.filter((task) => task.status === status);
     },
-    [allTasks]
+    [taskList]
   );
+
+  const { mutate: updateTask } = useUpdateTask();
+
+  const updateTaskStatus = (taskId: string, newStatus: TaskStatus) => {
+    setTaskList((prevTasks) =>
+      prevTasks.map((task) =>
+        task._id === taskId ? { ...task, status: newStatus } : task
+      )
+    );
+    updateTask(
+      { taskId, status: newStatus },
+      {
+        onSuccess: () => {
+          setSuccess(!success);
+        },
+      }
+    );
+  };
 
   return (
     <div>
@@ -44,6 +73,7 @@ const TodosBoard = () => {
                   sectionTitle={status.replace("_", " ")}
                   cardDatas={getTasksByStatus(status)}
                   status={status}
+                  onDrop={updateTaskStatus}
                 />
                 <AddNewButton
                   onButtonClick={() => {
@@ -56,7 +86,7 @@ const TodosBoard = () => {
           </div>
         </DndProvider>
       ) : (
-        <div className=" flex items-center justify-center  ">
+        <div className="flex items-center justify-center">
           <Spin size="large" />
         </div>
       )}

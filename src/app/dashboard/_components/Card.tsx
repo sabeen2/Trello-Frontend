@@ -1,4 +1,3 @@
-import { useUpdateTask } from "@/app/api-controllers/tasks/queries";
 import { initDeleteTask } from "@/app/api-controllers/tasks/requests";
 import { useAuth } from "@/providers/AuthContext";
 import { ITaskInterface } from "@/schema/task.schema";
@@ -12,13 +11,16 @@ interface CardProps {
 }
 
 const Card = ({ cardData }: CardProps) => {
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: "CARD",
+    item: { id: cardData._id, status: cardData.status },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  }));
+
   const { success, setSuccess, open, setOpen, createForm, setSelectedUserId } =
     useAuth();
-
-  const deleteTask = (taskId: string) => {
-    initDeleteTask(taskId);
-    setSuccess(!success);
-  };
 
   const updateTask = (cardData: ITaskInterface) => {
     let payload = {
@@ -31,14 +33,10 @@ const Card = ({ cardData }: CardProps) => {
     setOpen(true);
     createForm.setFieldsValue(payload);
   };
-
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: "CARD",
-    item: { id: cardData._id, status: cardData.status },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  }));
+  const deleteTask = (taskId: string) => {
+    initDeleteTask(taskId);
+    setSuccess(!success);
+  };
 
   return (
     <div

@@ -2,27 +2,27 @@ import Image from "next/image";
 import React from "react";
 import { useDrop } from "react-dnd";
 import Card from "./Card";
-import { useUpdateTask } from "@/app/api-controllers/tasks/queries";
 import { TaskStatus } from "@/schema/task.schema";
 import { useAuth } from "@/providers/AuthContext";
 
-const SectionSkeleton = ({ sectionTitle, cardDatas, status }: any) => {
-  const { mutate: updateTaskOn } = useUpdateTask();
-  const { success, setSuccess } = useAuth();
+interface SectionSkeletonProps {
+  sectionTitle: string;
+  cardDatas: any[];
+  status: TaskStatus;
+  onDrop: (taskId: string, newStatus: TaskStatus) => void;
+}
 
+const SectionSkeleton = ({
+  sectionTitle,
+  cardDatas,
+  status,
+  onDrop,
+}: SectionSkeletonProps) => {
   const [{ isOver }, drop] = useDrop({
     accept: "CARD",
     drop: (item: any) => {
-      // Ensure item and status are correctly handled
       if (item.status !== status) {
-        updateTaskOn(
-          { taskId: item.id, status },
-          {
-            onSuccess: () => {
-              setSuccess(!success);
-            },
-          }
-        );
+        onDrop(item.id, status);
       }
     },
     collect: (monitor) => ({
