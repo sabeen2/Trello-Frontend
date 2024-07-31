@@ -4,14 +4,6 @@ import tasks from "./request.details";
 
 const { getAllTasks, deleteTask } = tasks;
 
-// export const initGetAllTasks = (username: string): Promise<any> => {
-//   return makeHttpRequest(getAllTasks, {
-//     params: {
-//       username: username,
-//     },
-//   });
-// };
-
 export const initGetAllTasks = (username: string): Promise<any> => {
   return makeHttpRequest(getAllTasks, {
     pathVariables: {

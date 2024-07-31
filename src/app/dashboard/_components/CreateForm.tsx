@@ -6,7 +6,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import { ITaskInterface, TaskStatus, TaskPriority } from "@/schema/task.schema";
 import { useAuth } from "@/providers/AuthContext";
-import { useAddTask } from "@/app/api-controllers/tasks/queries";
+import { useAddTask, useUpdateTask } from "@/app/api-controllers/tasks/queries";
 import moment from "moment";
 
 const { Option } = Select;
@@ -24,9 +24,10 @@ const CreateForm: React.FC = () => {
   } = useAuth();
 
   const { mutate: createTask } = useAddTask();
+  const { mutate: updateTask } = useUpdateTask();
 
   const onFinish = (values: ITaskInterface) => {
-    let payload = {
+    const payload = {
       title: values.title,
       description: values.description,
       status: values.status,
@@ -39,17 +40,35 @@ const CreateForm: React.FC = () => {
       username: username,
     };
 
-    createTask(payload, {
-      onSuccess: () => {
-        message.success(`Task Added`);
-        createForm.resetFields();
-        setSuccess(!success);
-        setOpen(false);
-      },
-      onError: (err) => {
-        message.error(`Failed ${err}`);
-      },
-    });
+    if (selectedUserId) {
+      updateTask(
+        { ...payload, taskId: selectedUserId },
+        {
+          onSuccess: () => {
+            message.success(`Task Updated`);
+            createForm.resetFields();
+            setSuccess(!success);
+            setOpen(false);
+            setSelectedUserId("");
+          },
+          onError: (err) => {
+            message.error(`Failed ${err}`);
+          },
+        }
+      );
+    } else {
+      createTask(payload, {
+        onSuccess: () => {
+          message.success(`Task Added`);
+          createForm.resetFields();
+          setSuccess(!success);
+          setOpen(false);
+        },
+        onError: (err) => {
+          message.error(`Failed ${err}`);
+        },
+      });
+    }
   };
 
   const handleEnterPress = (e: React.KeyboardEvent<HTMLFormElement>) => {
@@ -91,7 +110,7 @@ const CreateForm: React.FC = () => {
               height={24}
               className="w-[24px] h-[24px] "
             />
-            <span> Status</span>
+            <span>Status</span>
             <Form.Item
               name="status"
               rules={[{ required: true, message: "Status is required" }]}
@@ -110,7 +129,7 @@ const CreateForm: React.FC = () => {
             </Form.Item>
           </div>
 
-          <div className="flex items-center space-x-2  pt-4">
+          <div className="flex items-center space-x-2 pt-4">
             <Image
               src={"/images/priority.png"}
               alt="priority"
@@ -118,7 +137,7 @@ const CreateForm: React.FC = () => {
               height={24}
               className="w-[24px] h-[24px] "
             />
-            <span> Priority</span>
+            <span>Priority</span>
             <Form.Item name="priority" className="flex-1 m-0">
               <Select
                 placeholder="Not selected"
@@ -133,7 +152,7 @@ const CreateForm: React.FC = () => {
             </Form.Item>
           </div>
 
-          <div className="flex items-center space-x-2  pt-4">
+          <div className="flex items-center space-x-2 pt-4">
             <Image
               src={"/images/calender.png"}
               alt="status"
@@ -141,8 +160,8 @@ const CreateForm: React.FC = () => {
               height={24}
               className="w-[24px] h-[24px] "
             />
-            <span> Deadline</span>
-            <Form.Item name="deadline" className="flex-1 m-0 ">
+            <span>Deadline</span>
+            <Form.Item name="deadline" className="flex-1 m-0">
               <DatePicker
                 placeholder="Not selected"
                 className="w-full border-none p-0 focus:ring-0"
@@ -151,7 +170,7 @@ const CreateForm: React.FC = () => {
             </Form.Item>
           </div>
 
-          <div className="flex items-center space-x-2 ">
+          <div className="flex items-center space-x-2">
             <Image
               src={"/images/edit.png"}
               alt="status"
@@ -159,8 +178,8 @@ const CreateForm: React.FC = () => {
               height={24}
               className="w-[24px] h-[24px] "
             />
-            <span> Description</span>
-            <Form.Item name="description" className="flex-1 m-0  pt-[18px]">
+            <span>Description</span>
+            <Form.Item name="description" className="flex-1 m-0 pt-[18px]">
               <Input.TextArea
                 placeholder="Not selected"
                 className="border-none p-0 focus:ring-0"

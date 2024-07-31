@@ -12,6 +12,7 @@ export enum TaskPriority {
 }
 
 export interface ITaskInterface {
+  taskId?: string;
   _id?: string | any;
   title?: string;
   status?: TaskStatus;

@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import Sidebar from "./_components/Sidebar";
+import DndContext from "./dnd-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,7 +12,7 @@ export default function RootLayout({
   return (
     <div className="flex">
       <Sidebar />
-      {children}
+      <DndContext>{children}</DndContext>
     </div>
   );
 }
