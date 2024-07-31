@@ -15,8 +15,6 @@ const Card = ({ cardData }: CardProps) => {
   const { success, setSuccess, open, setOpen, createForm, setSelectedUserId } =
     useAuth();
 
-  const { mutate: updateTaskOn } = useUpdateTask();
-
   const deleteTask = (taskId: string) => {
     initDeleteTask(taskId);
     setSuccess(!success);
@@ -45,55 +43,61 @@ const Card = ({ cardData }: CardProps) => {
   return (
     <div
       ref={drag as unknown as React.LegacyRef<HTMLDivElement>}
-      className={`bg-[#F9F9F9] w-[340px] px-4 py-4 border-[1px] border-[#DEDEDE] space-y-3 rounded-lg shadow-md ${
-        isDragging ? "opacity-50" : "opacity-100"
+      className={`bg-slate-50 w-[340px] px-3 py-3 border border-[#DEDEDE] rounded-lg shadow-lg transition-transform duration-200 ${
+        isDragging ? "opacity-70 scale-95" : "opacity-100 scale-100"
       }`}
     >
-      <div className="space-y-4">
-        <div className="text-[16px] font-[500] text-gray-800">
+      <div className="space-y-2 mb-2">
+        <div className="text-lg font-semibold text-gray-900 ">
           {cardData.title}
         </div>
-        <div className="text-[14px] font-[400] text-gray-600">
+        <div className="text-base font-normal text-gray-700">
           {cardData.description}
         </div>
       </div>
-      <div
-        className={`text-[12px] font-[400] text-white px-2 py-1 w-[55px] h-[27px] rounded-md ${
-          cardData.priority === "Low"
-            ? "bg-[#0ECC5A]"
-            : cardData.priority === "Medium"
-            ? "bg-[#FFA235]"
-            : "bg-[#FF6B6B]"
-        }`}
-      >
-        {cardData.priority}
-      </div>
+      {cardData.priority && (
+        <div
+          className={`text-xs font-semibold text-white px-3 py-1 rounded-md inline-flex ${
+            cardData.priority === "Low"
+              ? "bg-green-500"
+              : cardData.priority === "Medium"
+              ? "bg-orange-500"
+              : "bg-red-500"
+          }`}
+        >
+          {cardData.priority}
+        </div>
+      )}
 
       {cardData.deadline !== "Invalid Date" && (
-        <div className="flex items-center gap-x-2">
+        <div className="flex items-center gap-x-2 mt-2">
           <Image
             src={"/images/clock.png"}
             alt="clock"
             width={24}
             height={24}
-            className="w-[24px] h-[24px]"
+            className="w-4 h-4"
           />
-          <div>
-            <span className="text-[14px] font-[600] text-[#606060]">
-              {cardData.deadline}
-            </span>
+          <div className="text-sm font-medium text-gray-600">
+            {cardData.deadline}
           </div>
         </div>
       )}
 
-      <div className="text-[14px] font-[500] text-[#797979] flex gap-x-[150px]">
-        {getTimeDifference(cardData.createdAt)}
-        <div className="flex space-x-6">
-          <button onClick={() => updateTask(cardData)}>
-            <EditOutlined className="text-black text-lg" />
+      <div className="text-sm font-medium text-gray-500 flex justify-between items-center mt-3">
+        <span>{getTimeDifference(cardData.createdAt)}</span>
+        <div className="flex space-x-4">
+          <button
+            onClick={() => updateTask(cardData)}
+            className="p-1 hover:bg-gray-100 rounded"
+          >
+            <EditOutlined className="text-gray-700 text-xl" />
           </button>
-          <button onClick={() => deleteTask(cardData._id)}>
-            <DeleteOutlined className="text-red-600 text-lg" />
+          <button
+            onClick={() => deleteTask(cardData._id)}
+            className="p-1 hover:bg-gray-100 rounded"
+          >
+            <DeleteOutlined className="text-red-600 text-xl" />
           </button>
         </div>
       </div>
