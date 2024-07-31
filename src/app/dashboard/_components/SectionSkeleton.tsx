@@ -31,7 +31,7 @@ const SectionSkeleton = ({ sectionTitle, cardDatas, status }: any) => {
 
   return (
     <div
-      ref={drop}
+      ref={drop as any}
       className={`space-y-4 overflow-y-scroll max-h-[58vh] border-gray-200 px-2 rounded-lg border-b-[1px] border-l-[1px] items-center justify-center min-h-32  ${
         isOver ? "bg-gray-100" : "bg-white"
       }`}
