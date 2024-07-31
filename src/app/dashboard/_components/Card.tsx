@@ -4,9 +4,7 @@ import { useAuth } from "@/providers/AuthContext";
 import { ITaskInterface } from "@/schema/task.schema";
 import { getTimeDifference } from "@/utils/time.utils";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import dayjs from "dayjs";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { useDrag } from "react-dnd";
 
 interface CardProps {
@@ -14,16 +12,8 @@ interface CardProps {
 }
 
 const Card = ({ cardData }: CardProps) => {
-  const {
-    success,
-    setSuccess,
-    username,
-    open,
-    setOpen,
-    createForm,
-    setSelectedUserId,
-    selectedUserId,
-  } = useAuth();
+  const { success, setSuccess, open, setOpen, createForm, setSelectedUserId } =
+    useAuth();
 
   const { mutate: updateTaskOn } = useUpdateTask();
 

@@ -8,11 +8,12 @@ import { useAuth } from "@/providers/AuthContext";
 
 const SectionSkeleton = ({ sectionTitle, cardDatas, status }: any) => {
   const { mutate: updateTaskOn } = useUpdateTask();
-
   const { success, setSuccess } = useAuth();
+
   const [{ isOver }, drop] = useDrop({
     accept: "CARD",
     drop: (item: any) => {
+      // Ensure item and status are correctly handled
       if (item.status !== status) {
         updateTaskOn(
           { taskId: item.id, status },
@@ -32,7 +33,7 @@ const SectionSkeleton = ({ sectionTitle, cardDatas, status }: any) => {
   return (
     <div
       ref={drop as unknown as React.LegacyRef<HTMLDivElement>}
-      className={`space-y-4 overflow-y-scroll max-h-[58vh] border-gray-200 px-2 rounded-lg border-b-[1px] border-l-[1px] items-center justify-center min-h-32  ${
+      className={`space-y-4 overflow-y-scroll max-h-[58vh] border-gray-200 px-2 rounded-lg border-b-[1px] border-l-[1px] items-center justify-center min-h-32 ${
         isOver ? "bg-gray-100" : "bg-white"
       }`}
     >
@@ -48,7 +49,7 @@ const SectionSkeleton = ({ sectionTitle, cardDatas, status }: any) => {
       </div>
 
       {cardDatas?.map((cardData: any, index: number) => (
-        <Card key={index} cardData={cardData} />
+        <Card key={cardData._id} cardData={cardData} />
       ))}
     </div>
   );
