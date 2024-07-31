@@ -42,11 +42,11 @@ export const makeHttpRequest = async (
   };
 
   if (apiDetails.requestAuthType === RequestAuthType.AUTH) {
-    const token = localStorage.getItem("authToken")?.replace(/^"|"$/g, ""); // Remove any extra quotes
-    if (token) {
+    const tokens = localStorage.getItem("authToken")?.replace(/^"|"$/g, ""); // Remove any extra quotes
+    if (tokens) {
       config.headers = {
         ...config.headers,
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${tokens}`,
       };
     }
   }
