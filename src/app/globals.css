@@ -19,3 +19,12 @@
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1),
     inset 0px 12px 16px rgba(186, 186, 186, 0.2);
 }
+
+::-webkit-scrollbar {
+  width: 4px;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(61, 58, 58);
+  border-radius: 100px;
+}
