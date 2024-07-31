@@ -24,6 +24,8 @@ interface AuthContextType {
   createForm: any;
   selectedUserId?: string;
   setSelectedUserId: (selectedUserId: string | undefined) => void;
+  searchParams: string | undefined;
+  setSearchParams: (searchParams: string | undefined) => void;
 }
 
 interface IDecodedToken {
@@ -43,6 +45,7 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [createForm] = Form.useForm();
   const [success, setSuccess] = useState<boolean>(false);
   const [selectedUserId, setSelectedUserId] = useState<string | undefined>();
+  const [searchParams, setSearchParams] = useState<string>();
 
   const router = useRouter();
   useEffect(() => {
@@ -100,6 +103,8 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         createForm,
         setSelectedUserId,
         selectedUserId,
+        searchParams,
+        setSearchParams,
       }}
     >
       {children}

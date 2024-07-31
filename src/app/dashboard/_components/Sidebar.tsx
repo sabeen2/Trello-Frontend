@@ -80,9 +80,14 @@ const Sidebar = () => {
         </div>
         {/* NavItems Section */}
         <div className="flex flex-col gap-y-6">
-          <div className="flex justify-start flex-col gap-x-4 gap-y-4 ">
+          <div className="flex justify-start flex-col gap-x-4 gap-y-4  ">
             {navItems.map((item) => (
-              <div key={item.name} className="flex items-center gap-x-4">
+              <div
+                key={item.name}
+                className={`flex items-center gap-x-4 ${
+                  item.name == "Boards" ? "bg-gray-200 py-2 rounded-sm" : ""
+                } `}
+              >
                 <Image
                   src={item.icon}
                   alt={item.alt}

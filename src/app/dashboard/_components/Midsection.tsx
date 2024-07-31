@@ -1,6 +1,8 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import CreateTaskButton from "../core-components/CreateTaskButton";
+import { useAuth } from "@/providers/AuthContext";
 
 const midItems = [
   {
@@ -22,6 +24,7 @@ const midItems = [
 ];
 
 const Midsection = () => {
+  const { setSearchParams } = useAuth();
   return (
     <div>
       <div className="py-4 flex w-[1570px] justify-between ">
@@ -29,6 +32,7 @@ const Midsection = () => {
         <div className="flex items-center ">
           <input
             type="search"
+            onChange={(e) => setSearchParams(e.target.value)}
             placeholder="Search"
             className="px-2 py-1 border-[1px] border-gray-200 shadow-sm rounded-md"
           />

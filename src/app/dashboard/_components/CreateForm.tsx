@@ -194,13 +194,13 @@ const CreateForm: React.FC = () => {
         </Form>
       </div>
       <div className="flex justify-between">
-        <div>
+        <div className="text-gray-600">
           <div>Start writing, or drag your own files here.</div>
           <div>Press Enter or Click Submit to Save Task.</div>
         </div>
         <button
           type="submit"
-          className="bg-gray-300 px-4 py-1 rounded-sm"
+          className="bg-gray-300 px-4 py-1 rounded-lg"
           onClick={() => createForm.submit()}
         >
           Submit

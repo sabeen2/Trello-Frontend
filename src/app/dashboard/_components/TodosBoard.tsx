@@ -13,8 +13,16 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { Spin } from "antd";
 
 const TodosBoard = () => {
-  const { username, success, setSuccess, open, setOpen, createForm } =
-    useAuth();
+  const {
+    username,
+    success,
+    setSuccess,
+    open,
+    setOpen,
+    createForm,
+    setSearchParams,
+    searchParams,
+  } = useAuth();
 
   const {
     data: allTasks,
@@ -33,6 +41,23 @@ const TodosBoard = () => {
       setTaskList(allTasks.tasks);
     }
   }, [allTasks]);
+
+  useEffect(() => {
+    if (searchParams) {
+      const tasksArray = allTasks?.tasks;
+      const filteredTasks = tasksArray.filter((item: any) => {
+        return Object.keys(item).some((key) => {
+          return item[key]
+            ?.toString()
+            .toLowerCase()
+            .includes(searchParams?.toLowerCase().trim());
+        });
+      });
+      setTaskList(filteredTasks);
+    } else {
+      setTaskList(allTasks?.tasks);
+    }
+  }, [searchParams, allTasks]);
 
   const getTasksByStatus = useCallback(
     (status: TaskStatus) => {
