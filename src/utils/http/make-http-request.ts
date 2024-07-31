@@ -1,3 +1,4 @@
+"use client";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 import {
@@ -70,7 +71,7 @@ export const makeHttpRequest = async (
       errorMsg = "something went wrong";
     }
 
-    console.log(errorMsg);
+    // console.log(errorMsg);
     throw new Error(errorMsg);
   }
 };
