@@ -102,6 +102,7 @@ const TodosBoard = () => {
                 />
                 <AddNewButton
                   onButtonClick={() => {
+                    createForm.resetFields()
                     setOpen(true);
                     createForm.setFieldsValue({ status });
                   }}
