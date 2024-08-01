@@ -85,7 +85,7 @@ const Sidebar = () => {
               <div
                 key={item.name}
                 className={`flex items-center gap-x-4 ${
-                  item.name == "Boards" ? "bg-gray-200 py-2 rounded-sm" : ""
+                  item.name == "Home" ? "bg-gray-200 py-2 rounded-sm" : ""
                 } `}
               >
                 <Image
