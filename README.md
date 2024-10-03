@@ -13,13 +13,13 @@ npm install
 npm run dev
 ```
 
-Even though its not good share env secrets in public , just doing to make it convenient for reviewer to setup project.
+
 
 ## Usage
 
 #### Create .env.local in root and paste these values
 
 ```bash
-BASE_API_ENDPOINT=https://assingment-backend-kzba.onrender.com
-NEXT_PUBLIC_BASE_API_ENDPOINT=https://assingment-backend-kzba.onrender.com
+BASE_API_ENDPOINT= backend_url
+NEXT_PUBLIC_BASE_API_ENDPOINT= backend_url
 ```
