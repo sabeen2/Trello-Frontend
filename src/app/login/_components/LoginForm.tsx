@@ -60,7 +60,7 @@ const LoginForm: React.FC = () => {
           Welcome to <span className="text-[#4534AC]">Workflo</span>!
         </div>
         <button
-          className="mt-6 mb-4 bg-gradient-to-r from-[#FF9800] to-[#FF5722] text-white font-bold px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+          className="mt-6 mb-12 pb-4 bg-gradient-to-r from-[#FF9800] to-[#FF5722] text-white font-bold px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
           onClick={autofillCredentials}
         >
           Autofill Credentials
